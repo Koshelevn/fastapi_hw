@@ -47,7 +47,7 @@ def root():
 
 @app.post('/post')
 def post_post():
-    new_timestamp = Timestamp(id=post_db[-1].id + 1, timestamp=datetime.now().timestamp())
+    new_timestamp = Timestamp(id=post_db[-1].id + 1, timestamp=int(datetime.now().timestamp()))
     post_db.append(new_timestamp)
     return new_timestamp
 
