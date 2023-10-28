@@ -1,8 +1,7 @@
 from enum import Enum
-from fastapi import FastAPI, status, HTTPException
+from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from datetime import datetime
-from typing_extensions import Literal
 
 app = FastAPI()
 
