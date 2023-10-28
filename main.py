@@ -53,7 +53,10 @@ def post_post():
 
 
 @app.get('/dog')
-def get_dogs(kind: str = Literal[DogType.bulldog, DogType.dalmatian, DogType.terrier]):
+def get_dogs(kind: str = ''):
+    print(kind)
+    if not kind:
+        return list(dogs_db.values())
     if kind not in [DogType.bulldog, DogType.dalmatian, DogType.terrier]:
         raise HTTPException(status_code=422, detail='"kind" field should be one of '
                                                     f'{DogType.bulldog.value, DogType.dalmatian.value, DogType.terrier.value}')
