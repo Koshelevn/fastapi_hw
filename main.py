@@ -47,13 +47,16 @@ def root():
 
 @app.post('/post')
 def post_post():
-    new_timestamp = Timestamp(id=post_db[-1].id + 1, timestamp=datetime.now().timestamp())
+    new_timestamp = Timestamp(id=post_db[-1].id + 1, timestamp=int(datetime.now().timestamp()))
     post_db.append(new_timestamp)
     return new_timestamp
 
 
 @app.get('/dog')
-def get_dogs(kind: str = Literal[DogType.bulldog, DogType.dalmatian, DogType.terrier]):
+def get_dogs(kind: str = ''):
+    print(kind)
+    if not kind:
+        return list(dogs_db.values())
     if kind not in [DogType.bulldog, DogType.dalmatian, DogType.terrier]:
         raise HTTPException(status_code=422, detail='"kind" field should be one of '
                                                     f'{DogType.bulldog.value, DogType.dalmatian.value, DogType.terrier.value}')
